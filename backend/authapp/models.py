@@ -1,7 +1,7 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
-NULLUBLE = {
+NULLABLE = {
     'blank': True,
     'null': True
 }
@@ -10,7 +10,7 @@ class User(AbstractUser):
     
     phone = models.PositiveIntegerField(
             verbose_name='телефон',
-            **NULLUBLE,
+            **NULLABLE,
             )
     
     phone_code = models.PositiveSmallIntegerField(
@@ -20,6 +20,7 @@ class User(AbstractUser):
     
     avatar = models.ImageField(
             verbose_name='аватар',
+            upload_to='img/avatars/',
             )
     
     is_deleted = models.BooleanField(
@@ -36,5 +37,5 @@ class User(AbstractUser):
         return f'{self.pk} | {self.username}'
 
     def delete(self, *args, **kwargs):
-        self.delete = True
+        self.is_delete = True
         self.save()
